@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [SDP_2.PrjPcb]
+   Generated File[SDP.TXT]
+   Generated File[SDP.LDP]
+   Generated File[SDP.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 16:40:56 On 09.02.2022
