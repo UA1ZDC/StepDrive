@@ -1,0 +1,14 @@
+Record=TopLevelDocument|FileName=ABS_ENC_IF.SchDoc|SheetNumber=4
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=CTRL_IF.SchDoc|SheetNumber=7
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=DISCRETE_IF.SchDoc|SheetNumber=8
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=DRIVER_A.SchDoc|SheetNumber=2
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=DRIVER_B.SchDoc|SheetNumber=3
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=ETHERNET.SchDoc|SheetNumber=10
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=INC_ENC_IF.SchDoc|SheetNumber=5
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=MCU.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=POE.SchDoc|SheetNumber=12
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=POWER.SchDoc|SheetNumber=13
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=RS485_IF.SchDoc|SheetNumber=7
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=SENSORS.SchDoc|SheetNumber=11
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=SNS_INPUT.SchDoc|SheetNumber=9
+Record=NoMainPathDocument|SourceDocument=ABS_ENC_IF.SchDoc|FileName=TELEM_IF.SchDoc|SheetNumber=6
