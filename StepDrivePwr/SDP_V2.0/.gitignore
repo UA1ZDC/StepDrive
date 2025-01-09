@@ -1,0 +1,13 @@
+/Arch
+/Output
+/History
+/Temp
+/Models
+/__Previews
+/Project*
+*.zip
+*.pdf
+*.x_t
+*.step
+*.dwg
+*.dxf
