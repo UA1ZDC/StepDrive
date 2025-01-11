@@ -1,0 +1,3 @@
+5V_tmc=5V,gnd
+tmc_inc_enc=enc_a,enc_b,+5V,gnd
+tmc_spi=sck,miso,mosi,cs,en,gnd

@@ -1,0 +1,3 @@
+br resistor=br,gnd
+motor=A+,A-,B+,B-
+PWR=36V,gnd

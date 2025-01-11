@@ -1,0 +1,10 @@
+12V PWR=vcc,gnd
+36V PWR=vcc,gnd
+ABS ENC AZ=clock+,clock-,data+,data-,+5V,gnd,shield,ccw_butt(NO),nc
+ABS ENC EL=clock+,clock-,data+,data-,+5V,gnd,shield,nc
+abs_enc_az=sck,sd,fs,gnd
+ccw_button=butt,gnd
+inc enc az=enc_a+,enc_a-,enc_b+,enc_b-,+5V,gnd,shield,nc
+inc enc el=enc_a+,enc_a-,enc_b+,enc_b-,+5V,gnd,shield,nc
+RS422 CTRL=rx+,rx-,tx+,tx-,gnd,nc
+RS422 TELEMETRY=rx+,rx-,tx+,tx-,gnd,nc

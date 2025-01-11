@@ -1,0 +1,8 @@
+5V_ext=5V,gnd
+abs_enc_az=sck,sd,fs,gnd
+abs_enc_el=sck,sd,fs,gnd
+ccw_button=butt,gnd
+spi_tmc_1=sck,miso,mosi,cs,en,gnd
+spi_tmc_2=sck,miso,mosi,cs,en,gnd
+uart_ctrl=tx,rx,gnd
+uart_telemetry=tx,rx,gnd

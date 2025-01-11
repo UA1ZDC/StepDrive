@@ -1,0 +1,641 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD21\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">17.02.2023</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">16:15:03</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:10</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc" class="file"><acronym title="I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc">I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">71</td></tr>
+</table>
+</td>
+</table><a name="ID1PSXYPIGTL34A1Q1GXK3FFMVM0CA25SWBQNKDIUWVYAV5QGKMAM"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWE30W4TATZDMWZQKBPXRICTTMPRXPY4BLBJHXGOX1SHFZII3IWN">Clearance Constraint (Gap=0.15mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKJLQ4ZCVBSNDQPBDXDNEBX11PFM14RE53CVY2E034KAX4DCO1BG">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSF3S0RV2DUBLB4GV3TQ0RRZGGLWR35BOVQ2IBDLFYECC0TUZGI1N">Clearance Constraint (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCETPGYWZYANZGYT54ZWBEZARGBP3B3CNZUY2OWFJCRKGTBJH4YDK">Clearance Constraint (Gap=0.125mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID11E0PZZU1DKQPMKZFDIWCBPJNBIC5G4PKSXALZJNDO2I1ZEJL3CN">Clearance Constraint (Gap=0.3mm) (Disabled)(All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYOS1EKDJRBLWGWQIYQZFZSZG4FIDF0CFV54TQRESO1LSTLTATFZM">Clearance Constraint (Gap=0.35mm) (Disabled)(All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0VDFV4DHWFQJVSXZGVVDBTGJPMQZTPSRRPWWDUZT1JBNDLYE1O">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0C4ZJ2OJ4XKJXJNTQU0QZG0RKJCRGE2NVHRQFNNJOYSFXB0XPKK">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXG4NAGICPASOLOOHSE0YRGCKEPIBU55AJFEBBGDSDHATB0SNWC3O">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFWQFA144SEI1MX15DOEXE0EM1P5ILUU3E2BFVKFBW4MBWURP2TWM">Width Constraint (Min=0.15mm) (Max=10mm) (Preferred=0.2mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKV12DG4VSO3TDRDBE4FAPMZLUO5YZOBXXELALYDEGRC0TBGHOJIJ">Width Constraint (Min=0.1mm) (Max=10mm) (Preferred=0.125mm) (Disabled)(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOCW0BSLIG2Y4MRZJRGAJI2FONBFQBG1FFJYTGMNWPMDAKTTYEVQC">Width Constraint (Min=0.3mm) (Max=10mm) (Preferred=0.35mm) (Disabled)(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDILVNNTFFZJVJH1WZJUGJWALZIPG1P3AILVPM2BG2PUQF3SMIZVSN">Width Constraint (Min=0.35mm) (Max=10mm) (Preferred=0.4mm) (Disabled)(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMA4ADLTWNNOJE50PYE0AYL3QDDCKBJFCMGI5UDNYEJS1JVEXVCHL">Power Plane Connect Rule(Relief Connect )(Expansion=0.15mm) (Conductor Width=0.15mm) (Air Gap=0.15mm) (Entries=4) (Disabled)(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDC2FYW3EU44ITJHFGAOETSZFEJL4YLLFZ3Y02EBDD1HDAAJHVQQGG">Power Plane Connect Rule(Relief Connect )(Expansion=0.15mm) (Conductor Width=0.2mm) (Air Gap=0.2mm) (Entries=4) (Disabled)(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVDQVKPM1P0XINGKK0W0ZES323JEDUKX2ERG4HZDDUT1DXFLG43VN">Power Plane Connect Rule(Relief Connect )(Expansion=0.2mm) (Conductor Width=0.2mm) (Air Gap=0.2mm) (Entries=4) (Disabled)(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGE05NACKEJAEP03QUPXHYGI1TFG2KVZ3PFFUPKM5NIY0SLWOBT0C">Power Plane Connect Rule(Relief Connect )(Expansion=0.2mm) (Conductor Width=0.2mm) (Air Gap=0.2mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5INC4SU2ADYW1VRFOZRTV5HJNY1M5N1DFI1OWHLWVMHZSHRYWAM">Power Plane Connect Rule(Relief Connect )(Expansion=0.2mm) (Conductor Width=0.35mm) (Air Gap=0.35mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIZLBF2RVLMNUTZ4M0VAOJEFWOXLNVI0A4R31LKQMTGI0SJ50UXE">Power Plane Connect Rule(Relief Connect )(Expansion=0.2mm) (Conductor Width=0.3mm) (Air Gap=0.3mm) (Entries=4) (Disabled)(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDY0P5SO2KJ13DE3FN13M03PME3HCTAPLTR4Q3ADBYUCGF1AP4PIVB">Minimum Annular Ring (Minimum=0.1mm) (Disabled)(IsVia)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDU2DOHPN5LTQGFDWOWXCC1CZJLOLM5TB3ED42ZRPTUCBAABQRIUMC">Minimum Annular Ring (Minimum=0.15mm) (Disabled)(IsPAD)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMMMCS24UU5CYBDEITETC3UQT4HR5EKERR0UUAXBKKLXLPPJY0NFE">Minimum Annular Ring (Minimum=0.15mm) (IsVia)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJZ5XEYICAEU21C1M0VJODLVXFQGPDIQZGRC52KBPNISETNWAF5I">Minimum Annular Ring (Minimum=0.2mm) (IsPAD)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBQ1TR1KNSDUKEQDTDWXAGAKQIGOLOL1AKXCYC5GBLOESB5R4OEMG">Acute Angle Constraint (Minimum=35.000) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDVAPCCPZZNJJDOTX5N3JFXB53VD2Z4JE1B3OWEHB3A4WHNP05HNEE">Hole Size Constraint (Min=0.3mm) (Max=5.9mm) (IsVia)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTO0UHX55A2VLCJS0NRH5OK54CHZKQ4RNZE0NI4J4GTJUNSIMXZJF">Hole Size Constraint (Min=0.2mm) (Max=5.9mm) (Disabled)(IsVia)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGHDKEBOAGT4CF3BEGDS4XMS2UDJ0HDCEIMEO0RCMSBA0O0OUQNWP">Hole Size Constraint (Min=0.6mm) (Max=5.9mm) (Disabled)(IsPad)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSWPM4KTXF51CEYEUELFPPK0M4LTAUWZDBTFBIWMI4H0LZZ522YKP">Hole To Hole Clearance (Gap=0.25mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRW3WSSF4ZW25JIP2EPF0ZVO5NL3EEYZIO1W5PDMIHELGF3MXZ4GE">Minimum Solder Mask Sliver (Gap=0.15mm) (All),(All)</a></td>
+<td class="column2">40</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVEWYNL1OILDKM5HXIKN0VGT0XFISDABEUVI0AYDNF1SVRAUIIISC">Minimum Solder Mask Sliver (Gap=0.1mm) (Disabled)(All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDLAE2N1BJB0WYLKI5EM1HSF2CODYGPE3W5OMRRPJF2ZWMP32JPFB">Silk To Solder Mask (Clearance=0.15mm) (Disabled)(IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDF1DPCXDLFRRPRRXEVYY0U3HANYUFJX502MO1ROJIBTCXAAPL3TB">Silk to Silk (Clearance=0.15mm) (Disabled)(All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDO3TAUPCHTGVWGXMKCLF4N0BZZIAYJA2ZYWWLM5KGLOFE2MIDO45F">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCV2GNXBEDCHBFLOLC4DQPEI12OVA0ESPJYAFRQOY00EXKJVLX2AL">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">30</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDEY1UMG0HGVWRDH4JVLXTYUOG5OZAFKJO3EFEUENXXEIBEFIQMGLL">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFS0AW1CAVKJ5DTOSZP4UVGWLBLREWBWFCUIFEDLSFHXEM1N4JY1H">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">71</td>
+</tr>
+</table><br><a name="ID0C4ZJ2OJ4XKJXJNTQU0QZG0RKJCRGE2NVHRQFNNJOYSFXB0XPKK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1837.795mil|Location2.X=7068.11mil|Location1.Y=4672.441mil|Location2.Y=6097.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1837.795mil|Location2.X=7068.11mil|Location1.Y=4672.441mil|Location2.Y=6097.244mil|Absolute=True">Un-Routed Net Constraint: Net +VM Between Pad P16_1-1(47.73mm,154.07mm) on Multi-Layer And Pad P16_2-1(178.73mm,119.73mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDRW3WSSF4ZW25JIP2EPF0ZVO5NL3EEYZIO1W5PDMIHELGF3MXZ4GE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.15mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1380.281mil|Location2.X=1387.436mil|Location1.Y=894.454mil|Location2.Y=901.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1380.281mil|Location2.X=1387.436mil|Location1.Y=894.454mil|Location2.Y=901.609mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_1-1(35.4mm,22.43mm) on Bottom Layer And Pad IC6_1-9(34.2mm,24.215mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1348.784mil|Location2.X=1355.94mil|Location1.Y=894.454mil|Location2.Y=901.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1348.784mil|Location2.X=1355.94mil|Location1.Y=894.454mil|Location2.Y=901.609mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_1-2(34.6mm,22.43mm) on Bottom Layer And Pad IC6_1-9(34.2mm,24.215mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1317.289mil|Location2.X=1324.444mil|Location1.Y=894.454mil|Location2.Y=901.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1317.289mil|Location2.X=1324.444mil|Location1.Y=894.454mil|Location2.Y=901.609mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_1-3(33.8mm,22.43mm) on Bottom Layer And Pad IC6_1-9(34.2mm,24.215mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1285.792mil|Location2.X=1292.948mil|Location1.Y=894.454mil|Location2.Y=901.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1285.792mil|Location2.X=1292.948mil|Location1.Y=894.454mil|Location2.Y=901.609mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_1-4(33mm,22.43mm) on Bottom Layer And Pad IC6_1-9(34.2mm,24.215mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1285.792mil|Location2.X=1292.948mil|Location1.Y=1005.084mil|Location2.Y=1012.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1285.792mil|Location2.X=1292.948mil|Location1.Y=1005.084mil|Location2.Y=1012.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_1-5(33mm,26mm) on Bottom Layer And Pad IC6_1-9(34.2mm,24.215mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1317.289mil|Location2.X=1324.444mil|Location1.Y=1005.084mil|Location2.Y=1012.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1317.289mil|Location2.X=1324.444mil|Location1.Y=1005.084mil|Location2.Y=1012.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_1-6(33.8mm,26mm) on Bottom Layer And Pad IC6_1-9(34.2mm,24.215mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1348.784mil|Location2.X=1355.94mil|Location1.Y=1005.084mil|Location2.Y=1012.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1348.784mil|Location2.X=1355.94mil|Location1.Y=1005.084mil|Location2.Y=1012.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_1-7(34.6mm,26mm) on Bottom Layer And Pad IC6_1-9(34.2mm,24.215mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1380.281mil|Location2.X=1387.436mil|Location1.Y=1005.084mil|Location2.Y=1012.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1380.281mil|Location2.X=1387.436mil|Location1.Y=1005.084mil|Location2.Y=1012.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_1-8(35.4mm,26mm) on Bottom Layer And Pad IC6_1-9(34.2mm,24.215mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9325.163mil|Location2.X=9332.318mil|Location1.Y=1161.58mil|Location2.Y=1168.735mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9325.163mil|Location2.X=9332.318mil|Location1.Y=1161.58mil|Location2.Y=1168.735mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_2-1(237.2mm,29.215mm) on Bottom Layer And Pad IC6_2-9(236mm,31mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9293.666mil|Location2.X=9300.822mil|Location1.Y=1161.58mil|Location2.Y=1168.735mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9293.666mil|Location2.X=9300.822mil|Location1.Y=1161.58mil|Location2.Y=1168.735mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_2-2(236.4mm,29.215mm) on Bottom Layer And Pad IC6_2-9(236mm,31mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9262.17mil|Location2.X=9269.326mil|Location1.Y=1161.58mil|Location2.Y=1168.735mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9262.17mil|Location2.X=9269.326mil|Location1.Y=1161.58mil|Location2.Y=1168.735mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_2-3(235.6mm,29.215mm) on Bottom Layer And Pad IC6_2-9(236mm,31mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9230.674mil|Location2.X=9237.83mil|Location1.Y=1161.58mil|Location2.Y=1168.735mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9230.674mil|Location2.X=9237.83mil|Location1.Y=1161.58mil|Location2.Y=1168.735mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_2-4(234.8mm,29.215mm) on Bottom Layer And Pad IC6_2-9(236mm,31mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9230.674mil|Location2.X=9237.83mil|Location1.Y=1272.21mil|Location2.Y=1279.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9230.674mil|Location2.X=9237.83mil|Location1.Y=1272.21mil|Location2.Y=1279.365mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_2-5(234.8mm,32.785mm) on Bottom Layer And Pad IC6_2-9(236mm,31mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9262.17mil|Location2.X=9269.326mil|Location1.Y=1272.21mil|Location2.Y=1279.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9262.17mil|Location2.X=9269.326mil|Location1.Y=1272.21mil|Location2.Y=1279.365mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_2-6(235.6mm,32.785mm) on Bottom Layer And Pad IC6_2-9(236mm,31mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9293.666mil|Location2.X=9300.822mil|Location1.Y=1272.21mil|Location2.Y=1279.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9293.666mil|Location2.X=9300.822mil|Location1.Y=1272.21mil|Location2.Y=1279.365mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_2-7(236.4mm,32.785mm) on Bottom Layer And Pad IC6_2-9(236mm,31mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9325.163mil|Location2.X=9332.318mil|Location1.Y=1272.21mil|Location2.Y=1279.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9325.163mil|Location2.X=9332.318mil|Location1.Y=1272.21mil|Location2.Y=1279.365mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.11mm &lt; 0.15mm) Between Pad IC6_2-8(237.2mm,32.785mm) on Bottom Layer And Pad IC6_2-9(236mm,31mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.11mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5350.753mil|Location2.X=5357.908mil|Location1.Y=2343.866mil|Location2.Y=2351.022mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5350.753mil|Location2.X=5357.908mil|Location1.Y=2343.866mil|Location2.Y=2351.022mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.05mm &lt; 0.15mm) Between Pad R12_2-1(135.825mm,59mm) on Bottom Layer And Via (136mm,60mm) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [0.05mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6029.887mil|Location2.X=6037.042mil|Location1.Y=2294.654mil|Location2.Y=2301.809mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6029.887mil|Location2.X=6037.042mil|Location1.Y=2294.654mil|Location2.Y=2301.809mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.05mm &lt; 0.15mm) Between Pad R13_2-1(153.075mm,59mm) on Bottom Layer And Via (153.25mm,58mm) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [0.05mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.194mil|Location2.X=5081.132mil|Location1.Y=5084.021mil|Location2.Y=5092.029mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.194mil|Location2.X=5081.132mil|Location1.Y=5084.021mil|Location2.Y=5092.029mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Pad SB1_1-1(128.25mm,129.25mm) on Bottom Layer And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4315.32mil|Location2.X=4323.258mil|Location1.Y=5085.989mil|Location2.Y=5093.998mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4315.32mil|Location2.X=4323.258mil|Location1.Y=5085.989mil|Location2.Y=5093.998mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Pad SB1_2-1(109mm,129.3mm) on Bottom Layer And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3777.918mil|Location2.X=3785.927mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3777.918mil|Location2.X=3785.927mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Pad SB2_1-1(96.25mm,59mm) on Top Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5396.029mil|Location2.X=5404.037mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5396.029mil|Location2.X=5404.037mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Pad SB2_2-1(137.35mm,59mm) on Top Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4535.792mil|Location2.X=4543.801mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4535.792mil|Location2.X=4543.801mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Pad SB3_1-1(115.5mm,59mm) on Top Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6075.162mil|Location2.X=6083.171mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6075.162mil|Location2.X=6083.171mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Pad SB3_2-1(154.6mm,59mm) on Top Layer And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2231.658mil|Location2.X=2239.667mil|Location1.Y=1889.341mil|Location2.Y=1897.279mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2231.658mil|Location2.X=2239.667mil|Location1.Y=1889.341mil|Location2.Y=1897.279mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Pad SB4_1-1(56.75mm,47.4mm) on Bottom Layer And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8422.603mil|Location2.X=8430.612mil|Location1.Y=3290.916mil|Location2.Y=3298.853mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8422.603mil|Location2.X=8430.612mil|Location1.Y=3290.916mil|Location2.Y=3298.853mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Pad SB4_2-1(214mm,83mm) on Bottom Layer And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2231.658mil|Location2.X=2239.667mil|Location1.Y=2247.608mil|Location2.Y=2255.546mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2231.658mil|Location2.X=2239.667mil|Location1.Y=2247.608mil|Location2.Y=2255.546mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Pad SB5_1-1(56.75mm,56.5mm) on Bottom Layer And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8422.603mil|Location2.X=8430.612mil|Location1.Y=3641.309mil|Location2.Y=3649.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8422.603mil|Location2.X=8430.612mil|Location1.Y=3641.309mil|Location2.Y=3649.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Pad SB5_2-1(214mm,91.9mm) on Bottom Layer And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8422.603mil|Location2.X=8430.612mil|Location1.Y=3641.309mil|Location2.Y=3649.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8422.603mil|Location2.X=8430.612mil|Location1.Y=3641.309mil|Location2.Y=3649.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Region (0 hole(s)) Bottom Solder And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2231.658mil|Location2.X=2239.667mil|Location1.Y=1889.341mil|Location2.Y=1897.279mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2231.658mil|Location2.X=2239.667mil|Location1.Y=1889.341mil|Location2.Y=1897.279mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Region (0 hole(s)) Bottom Solder And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4315.32mil|Location2.X=4323.258mil|Location1.Y=5085.989mil|Location2.Y=5093.998mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4315.32mil|Location2.X=4323.258mil|Location1.Y=5085.989mil|Location2.Y=5093.998mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Region (0 hole(s)) Bottom Solder And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.194mil|Location2.X=5081.132mil|Location1.Y=5084.021mil|Location2.Y=5092.029mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.194mil|Location2.X=5081.132mil|Location1.Y=5084.021mil|Location2.Y=5092.029mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Region (0 hole(s)) Bottom Solder And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8422.603mil|Location2.X=8430.612mil|Location1.Y=3290.916mil|Location2.Y=3298.853mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8422.603mil|Location2.X=8430.612mil|Location1.Y=3290.916mil|Location2.Y=3298.853mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Region (0 hole(s)) Bottom Solder And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2231.658mil|Location2.X=2239.667mil|Location1.Y=2247.608mil|Location2.Y=2255.546mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2231.658mil|Location2.X=2239.667mil|Location1.Y=2247.608mil|Location2.Y=2255.546mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Region (0 hole(s)) Bottom Solder And Region (0 hole(s)) Bottom Solder [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3777.918mil|Location2.X=3785.927mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3777.918mil|Location2.X=3785.927mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6075.162mil|Location2.X=6083.171mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6075.162mil|Location2.X=6083.171mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5396.029mil|Location2.X=5404.037mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5396.029mil|Location2.X=5404.037mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4535.792mil|Location2.X=4543.801mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4535.792mil|Location2.X=4543.801mil|Location1.Y=2297.805mil|Location2.Y=2305.743mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.15mm) Between Region (0 hole(s)) Top Solder And Region (0 hole(s)) Top Solder [Top Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5350.753mil|Location2.X=5357.908mil|Location1.Y=2342.879mil|Location2.Y=2350.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5350.753mil|Location2.X=5357.908mil|Location1.Y=2342.879mil|Location2.Y=2350.034mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.15mm) Between Region (0 hole(s)) Top Solder And Via (136mm,60mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6029.887mil|Location2.X=6037.042mil|Location1.Y=2295.635mil|Location2.Y=2302.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6029.887mil|Location2.X=6037.042mil|Location1.Y=2295.635mil|Location2.Y=2302.79mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.1mm &lt; 0.15mm) Between Region (0 hole(s)) Top Solder And Via (153.25mm,58mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.1mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDCV2GNXBEDCHBFLOLC4DQPEI12OVA0ESPJYAFRQOY00EXKJVLX2AL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Board Clearance Constraint (Gap=0mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2201.54mil|Location2.X=2212.633mil|Location1.Y=6683.234mil|Location2.Y=6694.326mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2201.54mil|Location2.X=2212.633mil|Location1.Y=6683.234mil|Location2.Y=6694.326mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.21mm &lt; 0.25mm) Between Arc (56.06mm,169.3mm) on Top Overlay And Board Edge </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5374.088mil|Location2.X=5385.181mil|Location1.Y=392.148mil|Location2.Y=403.241mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5374.088mil|Location2.X=5385.181mil|Location1.Y=392.148mil|Location2.Y=403.241mil|Absolute=True">Board Outline Clearance(Outline Edge): (0.203mm &lt; 0.25mm) Between Board Edge And Text "P7_2" (136.135mm,10.457mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6333.037mil|Location2.X=6344.129mil|Location1.Y=388.154mil|Location2.Y=399.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6333.037mil|Location2.X=6344.129mil|Location1.Y=388.154mil|Location2.Y=399.247mil|Absolute=True">Board Outline Clearance(Outline Edge): (0mm &lt; 0.25mm) Between Board Edge And Text "TLMTR" (160.746mm,10.254mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.987mil|Location2.X=3.575mil|Location1.Y=862.361mil|Location2.Y=869.923mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.987mil|Location2.X=3.575mil|Location1.Y=862.361mil|Location2.Y=869.923mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (0.127mm,17.8mm)(0.127mm,26.2mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.987mil|Location2.X=3.575mil|Location1.Y=697.007mil|Location2.Y=704.568mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.987mil|Location2.X=3.575mil|Location1.Y=697.007mil|Location2.Y=704.568mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (0.127mm,17.8mm)(9.327mm,17.8mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.987mil|Location2.X=3.575mil|Location1.Y=1027.715mil|Location2.Y=1035.277mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=-3.987mil|Location2.X=3.575mil|Location1.Y=1027.715mil|Location2.Y=1035.277mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (0.127mm,26.2mm)(9.327mm,26.2mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4419.448mil|Location2.X=4427.009mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4419.448mil|Location2.X=4427.009mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (112.35mm,10mm)(112.35mm,19.2mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5387.952mil|Location2.X=5395.513mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5387.952mil|Location2.X=5395.513mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (136.95mm,10mm)(136.95mm,19.2mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5819.054mil|Location2.X=5826.615mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5819.054mil|Location2.X=5826.615mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (136.95mm,10mm)(158.85mm,10mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6250.156mil|Location2.X=6257.718mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6250.156mil|Location2.X=6257.718mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (158.85mm,10mm)(158.85mm,19.2mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7891.889mil|Location2.X=7899.45mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7891.889mil|Location2.X=7899.45mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (200.55mm,10mm)(200.55mm,19.2mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8057.243mil|Location2.X=8064.804mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8057.243mil|Location2.X=8064.804mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (200.55mm,10mm)(208.95mm,10mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8222.597mil|Location2.X=8230.159mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8222.597mil|Location2.X=8230.159mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (208.95mm,10mm)(208.95mm,19.2mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8480.471mil|Location2.X=8488.033mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8480.471mil|Location2.X=8488.033mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (215.5mm,10mm)(215.5mm,22mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8716.692mil|Location2.X=8724.253mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8716.692mil|Location2.X=8724.253mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (215.5mm,10mm)(227.5mm,10mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8952.912mil|Location2.X=8960.474mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8952.912mil|Location2.X=8960.474mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (227.5mm,10mm)(227.5mm,22mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9762.705mil|Location2.X=9770.267mil|Location1.Y=4996.219mil|Location2.Y=5003.781mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9762.705mil|Location2.X=9770.267mil|Location1.Y=4996.219mil|Location2.Y=5003.781mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (236mm,127mm)(248mm,127mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9762.705mil|Location2.X=9770.266mil|Location1.Y=5468.66mil|Location2.Y=5476.222mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9762.705mil|Location2.X=9770.266mil|Location1.Y=5468.66mil|Location2.Y=5476.222mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (236mm,139mm)(248mm,139mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9760.737mil|Location2.X=9768.298mil|Location1.Y=1874.172mil|Location2.Y=1881.734mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9760.737mil|Location2.X=9768.298mil|Location1.Y=1874.172mil|Location2.Y=1881.734mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (238.7mm,47.7mm)(247.9mm,47.7mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9760.737mil|Location2.X=9768.298mil|Location1.Y=2204.881mil|Location2.Y=2212.442mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9760.737mil|Location2.X=9768.298mil|Location1.Y=2204.881mil|Location2.Y=2212.442mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (238.7mm,56.1mm)(247.9mm,56.1mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9760.737mil|Location2.X=9768.298mil|Location1.Y=2039.526mil|Location2.Y=2047.088mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9760.737mil|Location2.X=9768.298mil|Location1.Y=2039.526mil|Location2.Y=2047.088mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (247.9mm,47.7mm)(247.9mm,56.1mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9762.705mil|Location2.X=9770.266mil|Location1.Y=5232.44mil|Location2.Y=5240.001mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9762.705mil|Location2.X=9770.266mil|Location1.Y=5232.44mil|Location2.Y=5240.001mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (248mm,127mm)(248mm,139mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1216.692mil|Location2.X=1224.253mil|Location1.Y=6691.839mil|Location2.Y=6699.4mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1216.692mil|Location2.X=1224.253mil|Location1.Y=6691.839mil|Location2.Y=6699.4mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (31mm,158mm)(31mm,170mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1452.912mil|Location2.X=1460.474mil|Location1.Y=6691.839mil|Location2.Y=6699.4mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1452.912mil|Location2.X=1460.474mil|Location1.Y=6691.839mil|Location2.Y=6699.4mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (31mm,170mm)(43mm,170mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1689.133mil|Location2.X=1696.694mil|Location1.Y=6691.839mil|Location2.Y=6699.4mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1689.133mil|Location2.X=1696.694mil|Location1.Y=6691.839mil|Location2.Y=6699.4mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (43mm,158mm)(43mm,170mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2231.849mil|Location2.X=2239.411mil|Location1.Y=6693.414mil|Location2.Y=6700.975mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2231.849mil|Location2.X=2239.411mil|Location1.Y=6693.414mil|Location2.Y=6700.975mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (56.785mm,149.76mm)(56.785mm,170.08mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2412.361mil|Location2.X=2419.923mil|Location1.Y=6693.414mil|Location2.Y=6700.975mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2412.361mil|Location2.X=2419.923mil|Location1.Y=6693.414mil|Location2.Y=6700.975mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (56.785mm,170.08mm)(65.955mm,170.08mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2592.873mil|Location2.X=2600.434mil|Location1.Y=6693.414mil|Location2.Y=6700.975mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2592.873mil|Location2.X=2600.434mil|Location1.Y=6693.414mil|Location2.Y=6700.975mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (65.955mm,149.76mm)(65.955mm,170.08mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.345mil|Location2.X=3995.907mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3988.345mil|Location2.X=3995.907mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (90.45mm,10mm)(112.35mm,10mm) on Top Overlay </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\%D0%9F%D1%80%D0%B8%D0%B2%D0%BE%D0%B4 %D0%B0%D0%BD%D1%82%D0%B5%D0%BD%D0%BD%D1%8B\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3557.243mil|Location2.X=3564.804mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=I:\CORSAIR\Projects\SDR\Привод антенны\debug_board\db\DB.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3557.243mil|Location2.X=3564.804mil|Location1.Y=387.214mil|Location2.Y=394.775mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 0.25mm) Between Board Edge And Track (90.45mm,10mm)(90.45mm,19.2mm) on Top Overlay </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
